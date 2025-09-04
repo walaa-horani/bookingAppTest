@@ -12,7 +12,7 @@ npx shadcn@latest init
  npx shadcn@latest add button
 
 
-# 4) Push schema to Neon (push-only workflow)
+# 4) Push schema to Neon
 npx drizzle-kit push
 
 # 5) Inspect DB in your browser
