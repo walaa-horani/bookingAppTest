@@ -1,4 +1,3 @@
-// src/components/TimeSlots.tsx
 "use client";
 type Slot = { id: number; time: string; duration: number };
 
