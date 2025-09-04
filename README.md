@@ -1,43 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Live Demo: [https://booking-app-test-hm09snwne-walaa-horanis-projects.vercel.app](https://booking-app-test-hm09snwne-walaa-horanis-projects.vercel.app)
+
+
+# Booking App
+
+A simple 1:1 session booking platform built with Next.js 13 App Router, Clerk for authentication, Drizzle ORM, and Neon for PostgreSQL.
 
 ## Getting Started
 
-# 1) Install deps
+1. Clone the repo and install dependencies
+
+```bash
+git clone https://github.com/walaa-horani/bookingAppTest.git
+
 npm install
 
+2. Initialize Shadcn components
 
-# 2) Install Shadcn and included components
 npx shadcn@latest init 
- npx shadcn@latest add sonner
- npx shadcn@latest add button
+npx shadcn@latest add sonner
+npx shadcn@latest add button
 
 
-# 4) Push schema to Neon
+3. Add environment variables
+
+# === Clerk (Auth) ===
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_xxx
+CLERK_SECRET_KEY=sk_test_xxx
+
+# Optional (recommended for custom routes)
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=/booking
+NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL=/booking
+
+# === Database (Neon Postgres) ===
+# IMPORTANT: Never expose your DB URL as NEXT_PUBLIC_*
+DATABASE_URL=postgresql://USER:PASSWORD@HOST/DB_NAME?sslmode=require
+
+
+4. Database Setup
+
 npx drizzle-kit push
-
-# 5) Inspect DB in your browser
 npx drizzle-kit studio
 
-# 6) Run dev server
-npm run dev
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. API Documentation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+GET /api/sessions?date=2025-09-05
 
-## Learn More
+Response:
+{
+  "date": "2025-09-05",
+  "slots": [
+    { "id": 1, "time": "10:00", "duration": 60 },
+    { "id": 2, "time": "11:00", "duration": 60 }
+  ]
+}
 
-To learn more about Next.js, take a look at the following resources:
+POST /api/bookings
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Request:
+{
+  "sessionId": 2
+}
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Response:
+{
+  "success": true,
+  "booking": {
+    "id": 12,
+    "bookedAt": "2025-09-05T18:30:00.000Z",
+    "session": {
+      "id": 2,
+      "date": "2025-09-05",
+      "startTime": "11:00"
+    }
+  }
+}
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
