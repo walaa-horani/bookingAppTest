@@ -27,14 +27,12 @@ npx shadcn@latest add button
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_xxx
 CLERK_SECRET_KEY=sk_test_xxx
 
-# Optional (recommended for custom routes)
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
 NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=/booking
 NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL=/booking
 
 # === Database (Neon Postgres) ===
-# IMPORTANT: Never expose your DB URL as NEXT_PUBLIC_*
 DATABASE_URL=postgresql://USER:PASSWORD@HOST/DB_NAME?sslmode=require
 
 
