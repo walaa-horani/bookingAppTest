@@ -2,17 +2,24 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+# 1) Install deps
+npm install
 
-```bash
+
+# 2) Install Shadcn and included components
+npx shadcn@latest init 
+ npx shadcn@latest add sonner
+ npx shadcn@latest add button
+
+
+# 4) Push schema to Neon (push-only workflow)
+npx drizzle-kit push
+
+# 5) Inspect DB in your browser
+npx drizzle-kit studio
+
+# 6) Run dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

@@ -1,15 +1,17 @@
+import { IBM_Plex_Sans_Arabic, Readex_Pro, Rubik } from "next/font/google";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import {
+  ClerkProvider,
+ 
+} from '@clerk/nextjs'
+import Provider from "./Provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const rubik = Rubik({
+  subsets: ["arabic", "latin"],      // يدعم نص عربي + أرقام/إنكليزي
+  weight: ["300","400","500","700","800","900"], // اختَر ما تحتاجه
+  variable: "--font-rubik",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -23,12 +25,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <ClerkProvider>
+      <html lang="ar" dir="rtl" className={`${rubik.variable} antialiased`}>
+      
+      <body className="font-sans antialiased">
+     
+       
+        <Provider>
+          
         {children}
+        </Provider>
       </body>
     </html>
+    </ClerkProvider>
   );
 }
